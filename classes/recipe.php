@@ -21,6 +21,19 @@ class Recipe
 		"gallon"
 	);
 
+	public function __construct($title = null)
+	{
+		$this->setTitle($title);
+	}
+
+	public function __toString()
+	{
+		$output = "You are calling a " . __CLASS__ . " object with the title \"";
+		$output .= $this->getTitle() . "\"\n";
+		$output .= "It is stored in " . basename(__FILE__) . " at " . __DIR__ . ".\n";
+		return $output;
+	}
+
 	public function getTitle()
 	{
 		return $this->title;
@@ -28,19 +41,21 @@ class Recipe
 
 	public function setTitle($title)
 	{
-		$this->title = ucwords($title);
+		if (empty($title)) {
+			$this->title = null;
+		} else {
+			$this->title = ucwords($title);
+		}
 	}
 
 	public function addIngredient($item, $amount = null, $measure = null)
 	{
 
-		if ($amount != null && !is_float($amount) && !is_int($amount))
-		{
+		if ($amount != null && !is_float($amount) && !is_int($amount)) {
 			exit("The amount must be a float: " . gettype($amount) . " $amount given");
 		}
 
-		if($measure != null && !in_array(strtolower($measure), $this->measurements))
-		{
+		if($measure != null && !in_array(strtolower($measure), $this->measurements)) {
 			exit("Please enter a valid measurement: " . implode(", ", $this->measurements));
 		}
 

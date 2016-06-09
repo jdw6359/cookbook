@@ -5,8 +5,7 @@ class Render
 	public static function listIngredients($ingredients)
 	{
 		$output = "";
-		foreach($ingredients as $ing)
-		{
+		foreach($ingredients as $ing) {
 			$output .= $ing["amount"] . " " . $ing["measure"] . " " . $ing["item"];
 			$output .= "\n";
 		}

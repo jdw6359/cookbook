@@ -2,22 +2,33 @@
 
 class Recipe
 {
-	public $title;
+	private $title;
 	public $ingredients = array();
 	public $instructions = array();
 	public $tag = array();
 	public $yield;
 	public $source = 'Josh Woodward';
 
+	public function getTitle()
+	{
+		return $this->title;
+	}
+
+	public function setTitle($title)
+	{
+		$this->title = ucwords($title);
+	}
+
+	public function displayRecipe()
+	{
+		return $this->title . ' by ' . $this->source;
+	}
+
 }
 
 $recipe1 = new Recipe();
+$recipe1->setTitle('mac and cheese');
 
-# access object property
-echo $recipe1->source;
-$recipe1->source = 'New Source';
-echo $recipe1->source;
-
-$recipe1 = new Recipe();
-$recipe2->source = 'Betty Crocker';
+echo $recipe1->displayRecipe();
+echo $recipe1->getTitle();
 ?>

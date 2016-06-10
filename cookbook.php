@@ -1,20 +1,43 @@
 <?php
 include "classes/recipe.php";
 include "classes/render.php";
+include "classes/recipecollection.php";
+include "inc/recipes.php";
 
-$recipe1 = new Recipe('mac and cheese');
-$recipe1->setSource('Sage Auburn');
-$recipe1->setYield('lots of food');
+$cookbook = new RecipeCollection("Treehouse Recipes");
+$cookbook->addRecipe($belgian_waffles);
+$cookbook->addRecipe($dried_mushroom_ragout);
+$cookbook->addRecipe($rabbit_catalan);
+$cookbook->addRecipe($grilled_salmon_with_fennel);
+$cookbook->addRecipe($pistachio_duck);
+$cookbook->addRecipe($lemon_chicken);
+$cookbook->addRecipe($granola_muffins);
+$cookbook->addRecipe($pepper_casserole);
+$cookbook->addRecipe($silver_dollar_cakes);
+$cookbook->addRecipe($french_toast);
+$cookbook->addRecipe($corn_beef_hash);
+$cookbook->addRecipe($granola);
+$cookbook->addRecipe($spicy_omelette);
+$cookbook->addRecipe($scones);
 
-$recipe1->addIngredient("egg", 1);
-$recipe1->addIngredient("flour", 3.5, "cup");
+$breakfast = new RecipeCollection("Dank Breakfasts");
+foreach($cookbook->filterByTag("breakfast") as $recipe) {
+	$breakfast->addRecipe($recipe);
+}
 
-$recipe1->addInstruction("This is my first instruction");
-$recipe1->addInstruction("This is my second instruction");
 
-$recipe1->addTag('TASTY');
-$recipe1->addTag('Easy Bake Oven Material');
 
-echo Render::displayRecipe($recipe1);
-echo $recipe1;
+$week1 = new RecipeCollection("Meal Plan - Week 1");
+$week1->addRecipe($cookbook->filterById(2));
+$week1->addRecipe($cookbook->filterById(7));
+$week1->addRecipe($cookbook->filterById(4));
+echo Render::listRecipes($week1->getRecipeTitles());
+
+
+echo Render::listShopping($week1->getCombinedIngredients());
+
+//echo "*****BREAKFAST FOODS*****\n";
+
+//echo "\nbreakfast shopping list:\n";
+//echo Render::listShopping($breakfast->getCombinedIngredients());
 ?>

@@ -26,14 +26,6 @@ class Recipe
 		$this->setTitle($title);
 	}
 
-	public function __toString()
-	{
-		$output = "You are calling a " . __CLASS__ . " object with the title \"";
-		$output .= $this->getTitle() . "\"\n";
-		$output .= "It is stored in " . basename(__FILE__) . " at " . __DIR__ . ".\n";
-		return $output;
-	}
-
 	public function getTitle()
 	{
 		return $this->title;
